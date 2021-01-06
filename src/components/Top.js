@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Header from './Header';
+import Header from './BasicComponents/Header';
+import Footer from './BasicComponents/Footer';
 import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
 import candles from './Picture/candles.jpg';
@@ -48,6 +49,7 @@ export default function Top() {
                     </Button>
                     <p className={classes.p}>Picked Just <br></br>For You</p>
                 </Box>
+            <Footer/>
         </React.Fragment>
     );
 }
