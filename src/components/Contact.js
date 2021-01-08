@@ -4,50 +4,65 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Header from './BasicComponents/Header';
 import Footer from './BasicComponents/Footer';
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
     },
-    paper: {
-        padding: theme.spacing(2),
+    h1:{
         textAlign: 'center',
-        color: theme.palette.text.secondary,
+        color: '#696969',
+
     },
-    grid3:{
+    h4:{
         textAlign: 'center',
+        color: '#696969',
     },
-    grid1:{
-       boxShadow: 'none',
+box2: {
+    padding: '0.5em 1em',
+    margin: '10px auto',
+    fontWeight: 'bold',
+    border: 'solid 1px #000000',
+    height: 300,
+    width: 500,
+    borderRadius: 10,
+
+},
+    box1:{
+        padding: '0.5em 1em',
+        margin: '10px auto',
+        fontWeight: 'bold',
+        border: 'solid 1px #000000',
+        height: 50,
+        width: 500,
+        borderRadius: 10,
     },
-    grid2:{
-        boxShadow: 'none',
-    },
+
+button:{
+  textAlign: 'center',
+},
 }));
 
 export default function FullWidthGrid() {
     const classes = useStyles();
 
     return (
-        <div  >
+        <div >
             <Header/>
-            <Grid container spacing={3}>
-                <Grid item xs={12} className={classes.grid1}>
-                    <Paper className={classes.paper}>Contact US</Paper>
-                </Grid>
-                <Grid item xs={12}>
-                    <Paper className={classes.paper}>
-                        Questions not answered yet? We are here to help you!
-                    </Paper>
-                </Grid>
-                <Grid item xs={7} className={classes.grid1}>
-                    <Paper className={classes.paper}>xs=12</Paper>
-                </Grid>
-                <Grid item xs={7}>
-                    <Paper className={classes.paper}>xs=12</Paper>
-                </Grid>
-            </Grid>
-        <Footer/>
+                <h1 className={classes.h1}>Contact US</h1>
+                    <h4 className={classes.h4}>Questions not answered yet? We are here to help you!</h4>
+                       <div className={classes.box1}>
+                        </div>
+                            <div className={classes.box2}>
+                            </div>
+                                 <div className={classes.button}>
+                                    <Button variant="contained" color="primary" disableElevation
+                                            className={classes.button}>
+                                                Confirm
+                                    </Button>
+                                </div>
+            <Footer/>
         </div>
     );
 }
