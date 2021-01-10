@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router,Switch, Route} from 'react-router-dom';
 import Top from './components/Top';
 import Contact from './components/Contact';
+import SignUp from './components/SignUp';
 import { ConnectedRouter } from 'connected-react-router';
 import {history} from './configureStore';
 
@@ -14,6 +15,9 @@ const App = () => {
                 </Switch>
                 <Switch>
                     <Route exact path="/contact" component={Contact}/>
+                </Switch>
+                <Switch>
+                    <Route exact path="/signup" component={SignUp}/>
                 </Switch>
             </ConnectedRouter>
         </React.Fragment>
