@@ -27,11 +27,17 @@ const useStyles = makeStyles((theme) => ({
 
     },
     button1:{
-        backgroundColor: '#F08080',
+        backgroundColor: '#C0C0C0',
         color: 'white',
-        marginBottom: 50,
-        width: '25%',
+        width: '31%',
         borderRadius:10,
+    },
+    button2:{
+        backgroundColor: '#FFB6C1',
+        color: 'white',
+        width: '31%',
+        borderRadius:10,
+        marginBottom: 100,
     },
     input:{
         width: '30%',
@@ -55,6 +61,7 @@ const useStyles = makeStyles((theme) => ({
         marginTop:10,
         marginBottom: 20,
         borderRadius: 10,
+        fontSize: 15,
         width: '30%',
         height: 50,
         border: '1px solid #aaa',
@@ -78,27 +85,35 @@ export default function SignUp() {
                     id="message"
                     name="message"
                     className={classes.input1}
+                    placeholder="First Name"
                 />
                 <input
                     id="message"
                     name="message"
                     className={classes.input1}
+                    placeholder="Last Name"
                 /><br></br>
                 <input
                     id="message"
                     name="message"
                     className={classes.input}
+                    placeholder="Email"
                 /><br></br>
                 <input
                     id="message"
                     name="message"
                     className={classes.textArea}
+                    placeholder="Password(minimum 6 characters)"
                 />
             </form>
             <div className={classes.button}>
                 <p>By creating an account, you agree to our Terms</p>
                 <Button classes={{root: classes.button1,}}>
-                    Confirm
+                    Continue
+                </Button>
+                <p>or</p>
+                <Button classes={{root: classes.button2,}}>
+                   Login with Gmail
                 </Button>
             </div>
             <Footer/>
