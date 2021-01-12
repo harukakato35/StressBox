@@ -6,6 +6,7 @@ import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
 import candles from './Picture/candles.jpg';
 import Button from '@material-ui/core/Button';
+import { useFirebaseApp } from 'reactfire';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -32,6 +33,9 @@ const useStyles = makeStyles((theme) => ({
 export default function Top() {
     const classes = useStyles();
 
+    const firebase = useFirebaseApp();
+    console.log(firebase);
+
     return (
         <React.Fragment>
             <Header/>
@@ -53,3 +57,5 @@ export default function Top() {
         </React.Fragment>
     );
 }
+
+//console.log(firebase); making sure firebase is working

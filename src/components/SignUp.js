@@ -1,13 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
+import { useFirebaseApp } from 'reactfire';
+import 'firebase/auth'
 import Header from './BasicComponents/Header';
 import Footer from './BasicComponents/Footer';
 import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import { StylesProvider } from "@material-ui/core/styles";
-import styled from "styled-components";
+
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
@@ -75,6 +73,64 @@ const useStyles = makeStyles((theme) => ({
 export default function SignUp() {
     const classes = useStyles();
 
+    const firebase = useFirebaseApp();
+
+    const handleSubmit = async(e) => {
+        e.preventDefault();
+        // Sign up code here.
+        await firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
+            .then(result => {
+                // Update the nickname
+                result.user.updateProfile({
+                    displayName: user.userName,
+                });
+
+                // URL of my website.
+                const myURL = { url: 'http://localhost:3000/' }
+
+                // Send Email Verification and redirect to my website.
+                result.user.sendEmailVerification(myURL)
+                    .then(() => {
+                        setUser({
+                            ...user,
+                            verifyEmail: `Welcome ${user.userName}. To continue please verify your email.`,
+                        })
+                    })
+                    .catch(error => {
+                        setUser({
+                            ...user,
+                            error: error.message,
+                        })
+                    })
+
+                // Sign Out the user.
+                firebase.auth().signOut();
+            }).catch(error => {
+                // Update the error
+                setUser({
+                    ...user,
+                    error: error.message,
+                })
+            })
+    }
+
+    const [user, setUser] = useState({
+        userName: '',
+        email: '',
+        password: '',
+        error: '',
+    });
+
+    // onChange function
+    const handleChange = e => {
+        setUser({
+            ...user,
+            [e.target.name]: e.target.value,
+            error: '',
+        })
+    };
+
+
     return (
 
         <div >
@@ -82,33 +138,28 @@ export default function SignUp() {
             <h1 className={classes.h1}>Create Account!</h1>
             <form className={classes.form}>
                 <input
-                    id="message"
-                    name="message"
-                    className={classes.input1}
-                    placeholder="First Name"
-                />
-                <input
-                    id="message"
-                    name="message"
-                    className={classes.input1}
-                    placeholder="Last Name"
+                    type="text"
+                    name="userName"
+                    className={classes.input}
+                    placeholder="User Name"
+                    onChange={handleChange}
                 /><br></br>
                 <input
-                    id="message"
-                    name="message"
+                    type="text"
+                    name="email"
                     className={classes.input}
                     placeholder="Email"
                 /><br></br>
                 <input
-                    id="message"
-                    name="message"
+                    type="password"
+                    name="password"
                     className={classes.textArea}
                     placeholder="Password(minimum 6 characters)"
                 />
             </form>
             <div className={classes.button}>
                 <p>By creating an account, you agree to our Terms</p>
-                <Button classes={{root: classes.button1,}}>
+                <Button type="submit"　classes={{root: classes.button1,}}>
                     Continue
                 </Button>
                 <p>or</p>
@@ -116,8 +167,14 @@ export default function SignUp() {
                    Login with Gmail
                 </Button>
             </div>
+            {user.error && <h4>{user.error}</h4>}
             <Footer/>
         </div>
 
     );
 }
+
+//handleChange function updates the
+// state when the user changes the inputs. Also reset the error message to hide it.
+
+//handleSubmit function is gonna send the information to Firebase.
