@@ -33,9 +33,6 @@ const useStyles = makeStyles((theme) => ({
 export default function Top() {
     const classes = useStyles();
 
-    const firebase = useFirebaseApp();
-    console.log(firebase);
-
     return (
         <React.Fragment>
             <Header/>
@@ -57,5 +54,3 @@ export default function Top() {
         </React.Fragment>
     );
 }
-
-//console.log(firebase); making sure firebase is working

@@ -73,6 +73,23 @@ const useStyles = makeStyles((theme) => ({
 export default function SignUp() {
     const classes = useStyles();
 
+    const [user, setUser] = useState({
+        UserName: '',
+        email: '',
+        password: '',
+        error: '',
+        verifyEmail: '',
+    });
+
+    // onChange function
+    const handleChange = e => {
+        setUser({
+            ...user,
+            [e.target.name]: e.target.value,
+            error: '',
+        })
+    };
+
     const firebase = useFirebaseApp();
 
     const handleSubmit = async(e) => {
@@ -80,9 +97,9 @@ export default function SignUp() {
         // Sign up code here.
         await firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
             .then(result => {
-                // Update the nickname
+                // Update the username
                 result.user.updateProfile({
-                    displayName: user.userName,
+                    displayName: user.username,
                 });
 
                 // URL of my website.
@@ -93,7 +110,7 @@ export default function SignUp() {
                     .then(() => {
                         setUser({
                             ...user,
-                            verifyEmail: `Welcome ${user.userName}. To continue please verify your email.`,
+                            verifyEmail: `Welcome ${user.username}. To continue please verify your email.`,
                         })
                     })
                     .catch(error => {
@@ -114,21 +131,6 @@ export default function SignUp() {
             })
     }
 
-    const [user, setUser] = useState({
-        userName: '',
-        email: '',
-        password: '',
-        error: '',
-    });
-
-    // onChange function
-    const handleChange = e => {
-        setUser({
-            ...user,
-            [e.target.name]: e.target.value,
-            error: '',
-        })
-    };
 
 
     return (
@@ -136,10 +138,10 @@ export default function SignUp() {
         <div >
             <Header/>
             <h1 className={classes.h1}>Create Account!</h1>
-            <form className={classes.form}>
+            <form className={classes.form} onSubmit={handleSubmit}>
                 <input
                     type="text"
-                    name="userName"
+                    name="username"
                     className={classes.input}
                     placeholder="User Name"
                     onChange={handleChange}
@@ -156,7 +158,6 @@ export default function SignUp() {
                     className={classes.textArea}
                     placeholder="Password(minimum 6 characters)"
                 />
-            </form>
             <div className={classes.button}>
                 <p>By creating an account, you agree to our Terms</p>
                 <Button type="submit"　classes={{root: classes.button1,}}>
@@ -167,7 +168,9 @@ export default function SignUp() {
                    Login with Gmail
                 </Button>
             </div>
+            </form>
             {user.error && <h4>{user.error}</h4>}
+            {user.verifyEmail && <h4>{user.verifyEmail}</h4>}
             <Footer/>
         </div>
 

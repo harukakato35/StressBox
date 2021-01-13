@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useFirebaseApp } from 'reactfire';
+import 'firebase/auth'
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -69,27 +71,69 @@ const useStyles = makeStyles((theme) => ({
 export default function SignUp() {
     const classes = useStyles();
 
+    const [user, setUser] = useState({
+        email: '',
+        password: '',
+        error: '',
+    });
+
+    const handleChange = e => {
+        setUser({
+            ...user,
+            [e.target.name]: e.target.value,
+            error: '',
+        })
+    };
+
+    const firebase = useFirebaseApp();
+
+    // Submit function (Log in user)
+    const handleSubmit = e => {
+        e.preventDefault();
+        // Log in code here.
+        firebase.auth().signInWithEmailAndPassword(user.email, user.password)
+            .then(result => {
+                if (!result.user.emailVerified) {
+                    setUser({
+                        ...user,
+                        error: 'Please verify your email before to continue',
+                    })
+                    firebase.auth().signOut();
+                }
+            })
+            .catch(error => {
+                // Update the error
+                setUser({
+                    ...user,
+                    error: error.message,
+                })
+            })
+    }
+
     return (
             <div className={classes.root}>
                 <Header/>
                 <Grid >
                     <Grid item xs={5} className={classes.grid}>
                         <Paper className={classes.paper}>
+                            <form onSubmit={handleSubmit}>
                             <h1>Welcome back!</h1>
                               <p>Please sign in below to continue</p>
                                  <p className={classes.p1}>Email address</p>
                                     <input
-                                        id="message"
-                                        name="message"
+                                        type="text"
+                                        name="Email"
                                         className={classes.input1}
+                                        onChange={handleChange}
                                     /><br></br>
                                     <p className={classes.p1}>Password</p>
                                     <input
-                                        id="message"
-                                        name="message"
+                                        type="password"
+                                        name="password"
                                         className={classes.input}
+                                        onChange={handleChange}
                                     /><br></br>
-                                        <Button classes={{root: classes.button1,}}>
+                                        <Button classes={{root: classes.button1,}} type="submit">
                                             Sign in
                                         </Button>
                                             <p>or</p>
@@ -97,6 +141,8 @@ export default function SignUp() {
                                             Sign in with Gmail
                                         </Button><br></br>
                             <p >Forgot Password?</p>
+                            </form>
+                            {user.error && <h4>{user.error}</h4>}
                         </Paper>
                     </Grid>
                 </Grid>

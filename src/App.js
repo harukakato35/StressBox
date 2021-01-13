@@ -4,16 +4,17 @@ import Top from './components/Top';
 import Contact from './components/Contact';
 import SignUp from './components/SignUp';
 import SignIn from './components/SignIn';
+import SignOut from './components/SignOut';
 import { ConnectedRouter } from 'connected-react-router';
 import {history} from './configureStore';
-import { FirebaseAppProvider } from 'reactfire';
-import firebaseConfig from './Firebase/firebaseConfig';
+import { useUser } from 'reactfire';
+import { useFirebaseApp } from 'reactfire';
 
 const App = () => {
+    const user = useUser();
+
     return (
         <React.Fragment>
-            <FirebaseAppProvider firebaseConfig={firebaseConfig}>
-                <Suspense fallback={<h3>Loading...</h3>}>
                     <ConnectedRouter history={history}>
                         <Switch>
                             <Route exact path="/" component={Top}/>
@@ -27,9 +28,10 @@ const App = () => {
                         <Switch>
                             <Route exact path="/signin" component={SignIn}/>
                         </Switch>
+                        <Switch>
+                            <Route exact path="/signout" component={SignOut}/>
+                        </Switch>
                     </ConnectedRouter>
-                </Suspense>
-            </FirebaseAppProvider>,
         </React.Fragment>
     )
 
