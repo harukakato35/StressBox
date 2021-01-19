@@ -10,7 +10,10 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { StylesProvider } from "@material-ui/core/styles";
 import styled from "styled-components";
-
+import { useFirebase } from "react-redux-firebase";
+import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
+import { push } from 'connected-react-router'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -70,45 +73,22 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignUp() {
     const classes = useStyles();
+    const auth = useSelector(state => state.auth); //global stateを呼び出すため,Dev toolをみて決めてる
+    const dispatch = useDispatch();
+    const firebase = useFirebase();
 
-    const [user, setUser] = useState({
-        email: '',
-        password: '',
-        error: '',
-    });
-
-    const handleChange = e => {
-        setUser({
-            ...user,
-            [e.target.name]: e.target.value,
-            error: '',
-        })
+    const signInWithGoogle = () => {
+        firebase
+            .login({
+                provider: "google",
+                type: "popup",
+            })
+            .then(() => {
+                dispatch({ type: "USE_PROFILE" });
+                dispatch(push('/top'));
+            });
     };
 
-    const firebase = useFirebaseApp();
-
-    // Submit function (Log in user)
-    const handleSubmit = e => {
-        e.preventDefault();
-        // Log in code here.
-        firebase.auth().signInWithEmailAndPassword(user.email, user.password)
-            .then(result => {
-                if (!result.user.emailVerified) {
-                    setUser({
-                        ...user,
-                        error: 'Please verify your email before to continue',
-                    })
-                    firebase.auth().signOut();
-                }
-            })
-            .catch(error => {
-                // Update the error
-                setUser({
-                    ...user,
-                    error: error.message,
-                })
-            })
-    }
 
     return (
             <div className={classes.root}>
@@ -116,7 +96,7 @@ export default function SignUp() {
                 <Grid >
                     <Grid item xs={5} className={classes.grid}>
                         <Paper className={classes.paper}>
-                            <form onSubmit={handleSubmit}>
+                            <form>
                             <h1>Welcome back!</h1>
                               <p>Please sign in below to continue</p>
                                  <p className={classes.p1}>Email address</p>
@@ -124,25 +104,26 @@ export default function SignUp() {
                                         type="text"
                                         name="Email"
                                         className={classes.input1}
-                                        onChange={handleChange}
                                     /><br></br>
                                     <p className={classes.p1}>Password</p>
                                     <input
                                         type="password"
                                         name="password"
                                         className={classes.input}
-                                        onChange={handleChange}
                                     /><br></br>
                                         <Button classes={{root: classes.button1,}} type="submit">
                                             Sign in
                                         </Button>
                                             <p>or</p>
-                                        <Button classes={{root: classes.button2,}}>
+                                        <Button classes={{root: classes.button2,}}
+                                                onClick={(event) => {
+                                                    event.preventDefault();
+                                                    signInWithGoogle();
+                                                }} >
                                             Sign in with Gmail
                                         </Button><br></br>
                             <p >Forgot Password?</p>
                             </form>
-                            {user.error && <h4>{user.error}</h4>}
                         </Paper>
                     </Grid>
                 </Grid>

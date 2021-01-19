@@ -15,7 +15,7 @@ export const history = createBrowserHistory();
 
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-export default function configureStore(preloadedState) {
+export  function configureStore(preloadedState) {
 
     const store = createStore(
         rootReducer(history),
@@ -30,3 +30,4 @@ export default function configureStore(preloadedState) {
     return store;
 };
 //↑Redux dev toolsとconnectingしている
+

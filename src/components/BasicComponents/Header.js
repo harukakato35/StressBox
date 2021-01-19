@@ -4,10 +4,6 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import SignUp from '../SignUp';
-import SignIn from '../SignIn';
-import SignOut from '../SignOut';
-import {useFirebaseApp, useUser} from 'reactfire';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,9 +21,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Header() {
   const classes = useStyles();
-    const user = useUser();
-    const firebase = useFirebaseApp();
-    console.log(firebase);
 
   return (
       <React.Fragment>
@@ -36,17 +29,6 @@ export default function Header() {
           <Toolbar className={classes.button}>
               <p>ST</p>
               <Button color="inherit" >Login</Button>
-              {
-                  user &&
-                  <SignOut />
-              }
-              {
-                  !user &&
-                  <>
-                      <SignUp />
-                      <SignIn />
-                  </>
-              }
           </Toolbar>
         </AppBar>
       </div>
