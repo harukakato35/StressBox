@@ -7,16 +7,14 @@ import SignIn from './components/SignIn';
 import SignOut from './components/SignOut';
 import { ConnectedRouter } from 'connected-react-router';
 import {history} from './configureStore';
-import { useDispatch, useSelector } from 'react-redux';
-import { ReactReduxFirebaseProvider } from "react-redux-firebase";
+
 
 const App = () => {
-    const auth = useSelector(state => state.auth);
-    const dispatch = useDispatch();　//Login.jsのreducerを使うため
+
 
     return (
         <React.Fragment>
-            <ReactReduxFirebaseProvider {...auth}>
+
                 <ConnectedRouter history={history}>
                             <Switch>
                                 <Route exact path="/" component={Top}/>
@@ -37,7 +35,7 @@ const App = () => {
                                 <Route exact path="/top" component={Top}/>
                             </Switch>
                 </ConnectedRouter>
-            </ReactReduxFirebaseProvider>
+
         </React.Fragment>
     )
 
