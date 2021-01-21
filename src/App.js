@@ -7,14 +7,16 @@ import SignIn from './components/SignIn';
 import SignOut from './components/SignOut';
 import { ConnectedRouter } from 'connected-react-router';
 import {history} from './configureStore';
-
+import { Provider } from 'react-redux'
+import {configureStore} from './configureStore';
+const store = configureStore();
 
 const App = () => {
 
 
     return (
         <React.Fragment>
-
+            <Provider store={store}>
                 <ConnectedRouter history={history}>
                             <Switch>
                                 <Route exact path="/" component={Top}/>
@@ -35,7 +37,7 @@ const App = () => {
                                 <Route exact path="/top" component={Top}/>
                             </Switch>
                 </ConnectedRouter>
-
+                </Provider>
         </React.Fragment>
     )
 
