@@ -7,37 +7,37 @@ import SignIn from './components/SignIn';
 import SignOut from './components/SignOut';
 import { ConnectedRouter } from 'connected-react-router';
 import {history} from './configureStore';
-import { useDispatch, useSelector } from 'react-redux';
-import { ReactReduxFirebaseProvider } from "react-redux-firebase";
+import { Provider } from 'react-redux'
+import {configureStore} from './configureStore';
+const store = configureStore();
 
 const App = () => {
-    const auth = useSelector(state => state.auth);
-    const dispatch = useDispatch();　//Login.jsのreducerを使うため
+
 
     return (
         <React.Fragment>
-            <ReactReduxFirebaseProvider {...auth}>
+            <Provider store={store}>
                 <ConnectedRouter history={history}>
-                            <Switch>
-                                <Route exact path="/" component={Top}/>
-                            </Switch>
-                            <Switch>
-                                <Route exact path="/contact" component={Contact}/>
-                            </Switch>
-                            <Switch>
-                                <Route exact path="/signup" component={SignUp}/>
-                            </Switch>
-                            <Switch>
-                                <Route exact path="/signin" component={SignIn}/>
-                            </Switch>
-                            <Switch>
-                                <Route exact path="/signout" component={SignOut}/>
-                            </Switch>
-                            <Switch>
-                                <Route exact path="/top" component={Top}/>
-                            </Switch>
+                    <Switch>
+                        <Route exact path="/" component={Top}/>
+                    </Switch>
+                    <Switch>
+                        <Route exact path="/contact" component={Contact}/>
+                    </Switch>
+                    <Switch>
+                        <Route exact path="/signup" component={SignUp}/>
+                    </Switch>
+                    <Switch>
+                        <Route exact path="/signin" component={SignIn}/>
+                    </Switch>
+                    <Switch>
+                        <Route exact path="/signout" component={SignOut}/>
+                    </Switch>
+                    <Switch>
+                        <Route exact path="/top" component={Top}/>
+                    </Switch>
                 </ConnectedRouter>
-            </ReactReduxFirebaseProvider>
+            </Provider>
         </React.Fragment>
     )
 

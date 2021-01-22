@@ -91,42 +91,42 @@ export default function SignUp() {
 
 
     return (
-            <div className={classes.root}>
-                <Header/>
-                <Grid >
-                    <Grid item xs={5} className={classes.grid}>
-                        <Paper className={classes.paper}>
-                            <form>
+        <div className={classes.root}>
+            <Header/>
+            <Grid >
+                <Grid item xs={5} className={classes.grid}>
+                    <Paper className={classes.paper}>
+                        <form>
                             <h1>Welcome back!</h1>
-                              <p>Please sign in below to continue</p>
-                                 <p className={classes.p1}>Email address</p>
-                                    <input
-                                        type="text"
-                                        name="Email"
-                                        className={classes.input1}
-                                    /><br></br>
-                                    <p className={classes.p1}>Password</p>
-                                    <input
-                                        type="password"
-                                        name="password"
-                                        className={classes.input}
-                                    /><br></br>
-                                        <Button classes={{root: classes.button1,}} type="submit">
-                                            Sign in
-                                        </Button>
-                                            <p>or</p>
-                                        <Button classes={{root: classes.button2,}}
-                                                onClick={(event) => {
-                                                    event.preventDefault();
-                                                    signInWithGoogle();
-                                                }} >
-                                            Sign in with Gmail
-                                        </Button><br></br>
+                            <p>Please sign in below to continue</p>
+                            <p className={classes.p1}>Email address</p>
+                            <input
+                                type="text"
+                                name="Email"
+                                className={classes.input1}
+                            /><br></br>
+                            <p className={classes.p1}>Password</p>
+                            <input
+                                type="password"
+                                name="password"
+                                className={classes.input}
+                            /><br></br>
+                            <Button classes={{root: classes.button1,}} type="submit">
+                                Sign in
+                            </Button>
+                            <p>or</p>
+                            <Button classes={{root: classes.button2,}}
+                                    onClick={(event) => {
+                                        event.preventDefault();
+                                        signInWithGoogle();
+                                    }} >
+                                Sign in with Gmail
+                            </Button><br></br>
                             <p >Forgot Password?</p>
-                            </form>
-                        </Paper>
-                    </Grid>
+                        </form>
+                    </Paper>
                 </Grid>
+            </Grid>
             <Footer/>
         </div>
 

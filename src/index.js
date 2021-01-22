@@ -7,9 +7,12 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
 import { useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from 'react-redux';
 import { createFirestoreInstance } from "redux-firestore";
 import { BrowserRouter } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
+import { ReactReduxFirebaseProvider } from "react-redux-firebase";
+import { createStore, compose } from "redux";
+import { rootReducer } from "./rootReducer";
 
   const firebaseConfig = {
     apiKey: "AIzaSyAOSBfTj_VQ4byWAAOWDhAsklmZtk2W_iE",
@@ -21,14 +24,32 @@ import { BrowserRouter } from "react-router-dom";
     measurementId: "G-J26Y6MYWV3"
   };
 
+const rrfConfig = {
+  userProfile: "users",
+  useFirestoreForProfile: true,
+};
+
 firebase.initializeApp(firebaseConfig);
 firebase.firestore();
 
+const initialState = {};
+const store = createStore(rootReducer, initialState);
+
+const rrfProps = {
+  firebase,
+  config: rrfConfig,
+  dispatch: store.dispatch,
+  createFirestoreInstance,
+};
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={configureStore()}>
+    <Provider store={store}>
+      <ReactReduxFirebaseProvider {...rrfProps}>
+
           <App />
+
+      </ReactReduxFirebaseProvider>
     </Provider>
   </React.StrictMode>,
     document.getElementById('root')

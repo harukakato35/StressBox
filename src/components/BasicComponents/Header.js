@@ -28,7 +28,13 @@ export default function Header() {
         <AppBar position="static" color='white' className={classes.appBar}>
           <Toolbar className={classes.button}>
               <p>ST</p>
-              <Button color="inherit" >Login</Button>
+              {auth.user ? (
+                  <React.fragment>
+                      <Button onClick={() => auth.signout()}>Signout</Button>
+                  </React.fragment>
+              ) : (
+                  <Link to="/signin">Signin</Link>
+              )}
           </Toolbar>
         </AppBar>
       </div>
