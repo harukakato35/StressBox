@@ -4,6 +4,9 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import "firebase/auth";
+import firebase from "firebase/app";
+import { Link } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Header() {
   const classes = useStyles();
+    const auth = firebase.auth();
 
   return (
       <React.Fragment>
@@ -28,7 +32,13 @@ export default function Header() {
         <AppBar position="static" color='white' className={classes.appBar}>
           <Toolbar className={classes.button}>
               <p>ST</p>
-              <Button color="inherit" >Login</Button>
+              {auth.user ? (
+                  <React.fragment>
+                      <Button onClick={() => auth.signout()}>Signout</Button>
+                  </React.fragment>
+              ) : (
+                  <Link to="/signin">Signin</Link>
+              )}
           </Toolbar>
         </AppBar>
       </div>
