@@ -59,15 +59,11 @@ export default function Header() {
           <Toolbar className={classes.button}>
               <p>ST</p>
               {
-
-                  setCurrentUser?
-
+                  currentUser?
                       (<div>
                               <button onClick={signInWithGoogle}>SIGN IN WITH GOOGLE</button>
                           </div>
                       ) :
-
-
                   <button onClick={signOutWithGoogle}>LOG OUT</button>
               }
           </Toolbar>
