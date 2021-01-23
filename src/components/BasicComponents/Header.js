@@ -4,6 +4,9 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import {push} from "connected-react-router";
+import {useDispatch, useSelector} from "react-redux";
+import {useFirebase} from "react-redux-firebase";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,20 +24,39 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Header() {
   const classes = useStyles();
+    const auth = useSelector(state => state.auth); //global stateを呼び出すため,Dev toolをみて決めてる
+    const dispatch = useDispatch();
+    const firebase = useFirebase();
+    const signInWithGoogle = () => {
+        firebase
+            .login({
+                provider: "google",
+                type: "popup",
+            })
+            .then(() => {
+                dispatch({ type: "USE_PROFILE" });
+                dispatch(push('/top'));
+            });
+    };
 
+    const signOutWithGoogle = () => {
+        firebase
+            .logout({
+                provider: "google",
+                type: "popup",
+            })
+            .then(() => {
+                dispatch({ type: "USE_PROFILE" });
+                dispatch(push('/logout'));
+            });
+    };
   return (
       <React.Fragment>
           <div className={classes.root}>
         <AppBar position="static" color='white' className={classes.appBar}>
           <Toolbar className={classes.button}>
               <p>ST</p>
-              {auth.user ? (
-                  <React.fragment>
-                      <Button onClick={() => auth.signout()}>Signout</Button>
-                  </React.fragment>
-              ) : (
-                  <Link to="/signin">Signin</Link>
-              )}
+
           </Toolbar>
         </AppBar>
       </div>

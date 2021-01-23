@@ -32,6 +32,8 @@ const rrfConfig = {
 firebase.initializeApp(firebaseConfig);
 firebase.firestore();
 
+export const auth = firebase.auth();
+
 const initialState = {};
 const store = createStore(rootReducer, initialState);
 
