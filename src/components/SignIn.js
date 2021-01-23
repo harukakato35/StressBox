@@ -89,17 +89,6 @@ export default function SignUp() {
             });
     };
 
-    const signOutWithGoogle = () => {
-        firebase
-            .logout({
-                provider: "google",
-                type: "popup",
-            })
-            .then(() => {
-                dispatch({ type: "USE_PROFILE" });
-                dispatch(push('/logout'));
-            });
-    };
 
     return (
         <div className={classes.root}>
@@ -133,13 +122,6 @@ export default function SignUp() {
                                     }} >
                                 Sign in with Gmail
                             </Button><br></br>
-                            <Button classes={{root: classes.button2,}}
-                                    onClick={(event) => {
-                                        event.preventDefault();
-                                        signOutWithGoogle();
-                                    }} >
-                                Sign out with Gmail
-                            </Button>
                             <p >Forgot Password?</p>
                         </form>
                     </Paper>

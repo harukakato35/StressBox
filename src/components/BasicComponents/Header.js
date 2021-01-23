@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button';
 import {push} from "connected-react-router";
 import {useDispatch, useSelector} from "react-redux";
 import {useFirebase} from "react-redux-firebase";
-
+import { useState } from 'react';
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -27,6 +27,8 @@ export default function Header() {
     const auth = useSelector(state => state.auth); //global stateを呼び出すため,Dev toolをみて決めてる
     const dispatch = useDispatch();
     const firebase = useFirebase();
+    const [currentUser, setCurrentUser] = useState("null");
+
     const signInWithGoogle = () => {
         firebase
             .login({
@@ -47,7 +49,7 @@ export default function Header() {
             })
             .then(() => {
                 dispatch({ type: "USE_PROFILE" });
-                dispatch(push('/logout'));
+                dispatch(push('/signin'));
             });
     };
   return (
@@ -56,7 +58,18 @@ export default function Header() {
         <AppBar position="static" color='white' className={classes.appBar}>
           <Toolbar className={classes.button}>
               <p>ST</p>
+              {
 
+                  setCurrentUser?
+
+                      (<div>
+                              <button onClick={signInWithGoogle}>SIGN IN WITH GOOGLE</button>
+                          </div>
+                      ) :
+
+
+                  <button onClick={signOutWithGoogle}>LOG OUT</button>
+              }
           </Toolbar>
         </AppBar>
       </div>
