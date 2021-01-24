@@ -40,7 +40,7 @@ export default function Header({children}) {
         <AppBar position="static" color='white' className={classes.appBar}>
           <Toolbar className={classes.button}>
               <p>ST</p>
-              {AuthProvider}
+        <AuthProvider/>
           </Toolbar>
         </AppBar>
       </div>

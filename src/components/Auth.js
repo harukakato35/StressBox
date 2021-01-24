@@ -48,13 +48,15 @@ const final = () => {
                 <Button onClick={signOutWithGoogle}>logout</Button>)
         } else {
             return (
-                <Button onClick={signInWithGoogle}></Button>)
+                <Button onClick={signInWithGoogle}>Login</Button>)
         }
     });
 
 }
 return (
+    <React.Fragment>
     {final}
+        </React.Fragment>
 );
 }
 
