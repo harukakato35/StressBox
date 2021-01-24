@@ -7,7 +7,7 @@ import firebase from "firebase/app";
 const AuthContext = createContext()
 
 export default function AuthProvider() {
-    const [currentUser, setCurrentUser] = useState(null)
+    const [user, setUser] = useState(null)
     const dispatch = useDispatch();
 
 
@@ -21,7 +21,6 @@ export default function AuthProvider() {
             .then(() => {
                 dispatch({ type: "USE_PROFILE" });
                 dispatch(push('/top'));
-                auth.onAuthStateChanged(user => setCurrentUser(user));
             });
         });
     };
