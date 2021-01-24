@@ -45,10 +45,10 @@ const final = () => {
     firebase.auth().onAuthStateChanged(user => {
         if (user) {
             return (
-                <Button>{signInWithGoogle}</Button>)
+                <Button onClick={signOutWithGoogle}>logout</Button>)
         } else {
             return (
-                <Button>{signOutWithGoogle}</Button>)
+                <Button onClick={signInWithGoogle}></Button>)
         }
     });
 
