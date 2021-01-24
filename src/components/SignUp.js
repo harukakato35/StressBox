@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { useFirebaseApp } from 'reactfire';
 import 'firebase/auth'
-import Header from './BasicComponents/Header';
+import Header from './Header';
 import Footer from './BasicComponents/Footer';
 import Button from '@material-ui/core/Button';
 
