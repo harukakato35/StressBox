@@ -30,8 +30,8 @@ const useStyles = makeStyles((theme) => ({
 export default function Header({children}) {
   const classes = useStyles();
     // const auth = useSelector(state => state.auth); //global stateを呼び出すため,Dev toolをみて決めてる
-    // const {signout } = useContext(AuthContext);
-    // const {signin } = useContext(AuthContext);
+    const dispatch = useDispatch();
+    const signOutWithGoogle = () => {
 
 
   return (
@@ -40,7 +40,8 @@ export default function Header({children}) {
         <AppBar position="static" color='white' className={classes.appBar}>
           <Toolbar className={classes.button}>
               <p>ST</p>
-        <AuthProvider/>
+              <button  type="submit"  onClick={() => signOut}>logout</button>
+
           </Toolbar>
         </AppBar>
       </div>

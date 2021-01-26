@@ -26,7 +26,7 @@ export default function AuthProvider() {
     };
 
     const signOutWithGoogle = () => {
-        firebase.auth().onAuthStateChanged(user => {
+
         firebase
             .logout({
                 provider: "google",
@@ -36,12 +36,11 @@ export default function AuthProvider() {
                 dispatch({ type: "USE_PROFILE" });
                 dispatch(push('/signin'));
             });
-        });
     };
 
 
 const final = () => {
-    firebase.auth().onAuthStateChanged(user => {
+
         if (user) {
             return (
                 <Button onClick={signOutWithGoogle}>logout</Button>)
@@ -49,7 +48,6 @@ const final = () => {
             return (
                 <Button onClick={signInWithGoogle}>Login</Button>)
         }
-    });
 
 }
 return (

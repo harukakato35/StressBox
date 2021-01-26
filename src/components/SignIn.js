@@ -71,7 +71,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function SignUp() {
+export default function SignIn() {
     const classes = useStyles();
     const auth = useSelector(state => state.auth); //global stateを呼び出すため,Dev toolをみて決めてる
     const dispatch = useDispatch();
