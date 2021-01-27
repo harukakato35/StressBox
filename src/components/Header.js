@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -6,11 +6,9 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import {push} from "connected-react-router";
 import {useDispatch, useSelector} from "react-redux";
-import {useFirebase} from "react-redux-firebase";
 import { useState } from 'react';
-import {  createContext, useCallback, useEffect } from 'react'
+import { useEffect } from 'react'
 import firebase from "firebase/app";
-import AuthProvider from './Auth';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -29,22 +27,44 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Header({children}) {
   const classes = useStyles();
-    // const auth = useSelector(state => state.auth); //global stateを呼び出すため,Dev toolをみて決めてる
+    const auth = useSelector(state => state.auth); //global stateを呼び出すため,Dev toolをみて決めてる
     const dispatch = useDispatch();
-    const signOutWithGoogle = () => {
+    const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        return firebase.auth().onAuthStateChanged(user => {
+            setUser(user);
+        });
+    }, []);
 
 
-  return (
-      <React.Fragment>
-          <div className={classes.root}>
-        <AppBar position="static" color='white' className={classes.appBar}>
-          <Toolbar className={classes.button}>
-              <p>ST</p>
-              <button  type="submit"  onClick={() => signOut}>logout</button>
 
-          </Toolbar>
-        </AppBar>
-      </div>
-      </React.Fragment>
-  );
-}
+    const logout = () => {
+        firebase
+            .logout({
+                provider: "google",
+                type: "popup",
+            })
+            .then(() => {
+                dispatch({ type: "USE_PROFILE" });
+                dispatch(push('/signin'));
+            });
+    };
+
+    return (
+            <React.Fragment>
+                <div className={classes.root}>
+                    <AppBar position="static" color='white' className={classes.appBar}>
+                        <Toolbar className={classes.button}>
+                            <p>ST</p>
+                            {user ? (
+                                <button onClick={logout}>Google Logout</button>
+                            ) : (
+                               <div></div>
+                            )}
+                        </Toolbar>
+                    </AppBar>
+                </div>
+            </React.Fragment>
+        );
+    }
