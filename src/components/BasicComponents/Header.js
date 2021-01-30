@@ -38,7 +38,6 @@ export default function Header({children}) {
     }, []);
 
 
-
     const logout = () => {
         firebase
             .logout({

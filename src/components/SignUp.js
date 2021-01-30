@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { useFirebaseApp } from 'reactfire';
 import 'firebase/auth'
-import Header from './Header';
+import Header from './BasicComponents/Header';
 import Footer from './BasicComponents/Footer';
 import Button from '@material-ui/core/Button';
 
@@ -81,7 +81,7 @@ export default function SignUp() {
         <div >
 
             <h1 className={classes.h1}>Create Account!</h1>
-            <form className={classes.form} o>
+            <form className={classes.form} >
                 <input
                     type="text"
                     name="username"
