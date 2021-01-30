@@ -28,6 +28,8 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: '#F08080',
         color: 'white',
         marginBottom: 50,
+        borderRadius: 20,
+        width: 150,
     },
     input:{
         width: '30%',

@@ -8,7 +8,7 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Box from '@material-ui/core/Box';
 import present from './Picture/present.jpg';
-import candles from "./Picture/candles.jpg";
+import { Link } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -84,7 +84,6 @@ export default function MyPage() {
                                    backgroundImage: `url(${present})`,
                                    backgroundSize: "cover",
                                    height: "50vh",
-
                                }}>
                             <Button variant="contained" className={classes.button}>
                                Get started!
@@ -94,7 +93,7 @@ export default function MyPage() {
                     </div>
                     <div className={classes.paper} >
                         <Paper className={classes.paper1}>
-                            <p className={classes.p}>Shipping information</p>
+                            <p className={classes.p}><Link to="/mypage/shippinginfo">Shipping information</Link></p>
                             <Button variant="contained" className={classes.button1}>
                                Edit
                             </Button>
