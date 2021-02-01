@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -9,6 +9,10 @@ import TextField from '@material-ui/core/TextField';
 import Box from '@material-ui/core/Box';
 import present from './Picture/present.jpg';
 import { Link } from 'react-router-dom'
+import {useSelector} from "react-redux";
+import firebase from "firebase";
+import Toolbar from "@material-ui/core/Toolbar";
+import SignIn from './SignIn';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -71,48 +75,63 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+
 export default function MyPage() {
     const classes = useStyles();
 
+    const [user, setUser] = useState(null);
+    const auth = useSelector(state => state.auth);
+
+    useEffect(() => {
+        return firebase.auth().onAuthStateChanged(user => {
+            setUser(user);
+        });
+    }, []);
     return (
         <React.Fragment>
-            <Header/>
-                <div  className={classes.div} >
-                    <div className={classes.paper} >
-                        <Paper className={classes.paper2}
-                               style={{
-                                   backgroundImage: `url(${present})`,
-                                   backgroundSize: "cover",
-                                   height: "50vh",
-                               }}>
-                            <Button variant="contained" className={classes.button}>
-                               Get started!
-                            </Button>
-                            <p className={classes.p1}>Customize your monthly package!</p>
-                        </Paper>
-                    </div>
-                    <div className={classes.paper} >
-                        <Paper className={classes.paper1}>
-                            <p className={classes.p}><Link to="/mypage/shippinginfo">Shipping information</Link></p>
-                            <Button variant="contained" className={classes.button1}>
-                               Edit
-                            </Button>
-                        </Paper>
-                        <Paper className={classes.paper1}>
-                            <p className={classes.p} >Your Email</p>
-                            <Button variant="contained" className={classes.button1}>
-                                Edit
-                            </Button>
-                        </Paper>
-                        <Paper className={classes.paper1}>
-                            <p  className={classes.p}>Your Password</p>
-                            <Button variant="contained" className={classes.button1}>
-                                Edit
-                            </Button>
-                        </Paper>
-                    </div>
-                </div>
-            <Footer/>
+            {user ? (
+                <React.Fragment>
+                    <Header/>
+                        <div  className={classes.div} >
+                            <div className={classes.paper} >
+                                <Paper className={classes.paper2}
+                                       style={{
+                                           backgroundImage: `url(${present})`,
+                                           backgroundSize: "cover",
+                                           height: "50vh",
+                                       }}>
+                                    <Button variant="contained" className={classes.button}>
+                                       Get started!
+                                    </Button>
+                                    <p className={classes.p1}>Customize your monthly package!</p>
+                                </Paper>
+                            </div>
+                            <div className={classes.paper} >
+                                <Paper className={classes.paper1}>
+                                    <p className={classes.p}><Link to="/mypage/shippinginfo">Shipping information</Link></p>
+                                    <Button variant="contained" className={classes.button1}>
+                                       Edit
+                                    </Button>
+                                </Paper>
+                                <Paper className={classes.paper1}>
+                                    <p className={classes.p} >Your Email</p>
+                                    <Button variant="contained" className={classes.button1}>
+                                        Edit
+                                    </Button>
+                                </Paper>
+                                <Paper className={classes.paper1}>
+                                    <p  className={classes.p}>Your Password</p>
+                                    <Button variant="contained" className={classes.button1}>
+                                        Edit
+                                    </Button>
+                                </Paper>
+                            </div>
+                        </div>
+                    <Footer/>
+                </React.Fragment>
+                ) : (
+                    <SignIn/>
+                )}
         </React.Fragment>
     );
 }

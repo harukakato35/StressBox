@@ -80,7 +80,7 @@ export default function SignIn() {
             })
             .then(() => {
                 dispatch({ type: "USE_PROFILE" });
-                dispatch(push('/top'));
+                dispatch(push('/mypage'));
             });
     };
 

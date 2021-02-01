@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React, {Suspense, useEffect, useState} from 'react';
 import { BrowserRouter as Router,Switch, Route} from 'react-router-dom';
 import Top from './components/Top';
 import Contact from './components/Contact';
@@ -8,13 +8,14 @@ import SignIn from './components/SignIn';
 import ShippingInfo from './components/ShippingInfo';
 import { ConnectedRouter } from 'connected-react-router';
 import {history} from './configureStore';
-import { Provider } from 'react-redux'
+import {Provider, useSelector} from 'react-redux'
 import {configureStore} from './configureStore';
+import Toolbar from "@material-ui/core/Toolbar";
 
 const store = configureStore();
 
-const App = () => {
 
+const App = () => {
 
     return (
         <React.Fragment>
@@ -30,13 +31,13 @@ const App = () => {
                         <Route exact path="/signup" component={SignUp}/>
                     </Switch>
                     <Switch>
-                        <Route exact path="/signin" component={SignIn}/>
-                    </Switch>
-                    <Switch>
                         <Route exact path="/mypage" component={MyPage}/>
                     </Switch>
                     <Switch>
                         <Route exact path="/mypage/shippinginfo" component={ShippingInfo}/>
+                    </Switch>
+                    <Switch>
+                        <Route exact path="/signin" component={SignIn}/>
                     </Switch>
                     <Switch>
                         <Route exact path="/top" component={Top}/>
