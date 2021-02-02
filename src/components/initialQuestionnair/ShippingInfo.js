@@ -9,6 +9,9 @@ import TextField from '@material-ui/core/TextField';
 import Box from '@material-ui/core/Box';
 import present from './Picture/present.jpg';
 import { Link } from 'react-router-dom'
+import db from '../../index.js';
+import React, { useState, useEffect } from 'react';
+import firebase from 'firebase';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -84,6 +87,16 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MyPage() {
     const classes = useStyles();
+    const [input, setInput] = useState('');
+
+    const addInfo = (event) => {
+        event.preventDefault();
+        db.collection('info').add({
+            info: input,
+            datetime: firebase.firestore.FieldValue.serverTimestamp()
+        })
+        setInput('');
+    }
 
     return (
         <React.Fragment>
@@ -94,8 +107,11 @@ export default function MyPage() {
                     <input
                         type="text"
                         name="username"
+                        id="addInfo"
                         className={classes.input1}
                         placeholder="First Name"
+                        value={input}
+                        onChange={event => setInput(event.target.value)}
 
                     />
                     <input
@@ -138,7 +154,7 @@ export default function MyPage() {
                     />
                     <div className={classes.button}>
                         <Button className={classes.button1} variant="contained">Cancel</Button>
-                        <Button className={classes.button2} variant="contained">Save</Button>
+                        <Button className={classes.button2} variant="contained"  onClick={addInfo}>Save</Button>
                     </div>
                 </form>
             </div>

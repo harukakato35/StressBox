@@ -14,7 +14,7 @@ import { ReactReduxFirebaseProvider } from "react-redux-firebase";
 import { createStore, compose } from "redux";
 import { rootReducer } from "./rootReducer";
 
-  const firebaseConfig = {
+const firebaseConfig = firebase.initializeApp({
     apiKey: "AIzaSyAOSBfTj_VQ4byWAAOWDhAsklmZtk2W_iE",
     authDomain: "stresstackle-599d9.firebaseapp.com",
     projectId: "stresstackle-599d9",
@@ -22,16 +22,17 @@ import { rootReducer } from "./rootReducer";
     messagingSenderId: "930013144401",
     appId: "1:930013144401:web:79b25db79f4118359fdf70",
     measurementId: "G-J26Y6MYWV3"
-  };
+});
 
 const rrfConfig = {
   userProfile: "users",
   useFirestoreForProfile: true,
 };
 
-firebase.initializeApp(firebaseConfig);
 firebase.firestore();
 
+const db = firebaseConfig.firestore();
+export default db;
 export const auth = firebase.auth();
 
 const initialState = {};

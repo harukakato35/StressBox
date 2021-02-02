@@ -9,6 +9,10 @@ import TextField from '@material-ui/core/TextField';
 import Box from '@material-ui/core/Box';
 import present from './Picture/present.jpg';
 import { Link } from 'react-router-dom'
+import db from '.././index.js';
+import { useState, useEffect } from 'react';
+import firebase from "firebase/app";
+import {useFirebase} from "react-redux-firebase";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -84,6 +88,29 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MyPage() {
     const classes = useStyles();
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [address1, setAddress1] = useState('');
+    const [address2, setAddress2] = useState('');
+    const [zipcode, setZipcode] = useState('');
+    const [state, setState] = useState('');
+    const [city, setCity] = useState('');
+    const firebase = useFirebase();
+
+    const addInfo = (event) => {
+        event.preventDefault();
+        db.collection('info').add({
+            info: firstName,lastName,
+            datetime: firebase.firestore.FieldValue.serverTimestamp()
+        })
+        setFirstName('');
+        setLastName('');
+        setAddress1('');
+        setAddress2('');
+        setZipcode('');
+        setState('');
+        setCity('');
+    }
 
     return (
         <React.Fragment>
@@ -93,52 +120,70 @@ export default function MyPage() {
                 <form className={classes.form} >
                     <input
                         type="text"
-                        name="username"
+                        name="firstName"
+                        id="addInfo"
                         className={classes.input1}
                         placeholder="First Name"
-
+                        value={firstName}
+                        onChange={event => setFirstName(event.target.value)}
                     />
                     <input
                         type="text"
-                        name="username"
+                        name="LastName"
                         className={classes.input1}
                         placeholder="Last Name"
-
+                        id="addInfo"
+                        value={lastName}
+                        onChange={event => setLastName(event.target.value)}
                     /><br></br>
                     <input
                         type="text"
-                        name="email"
+                        name="addressLine1"
                         className={classes.input}
                         placeholder="Address Line1"
-                    /><br></br>
-                    <input
-                        type="password"
-                        name="password"
-                        className={classes.textArea}
-                        placeholder="Address Line2(Optional)"
+                        id="addInfo"
+                        value={address1}
+                        onChange={event => setAddress1(event.target.value)}
                     /><br></br>
                     <input
                         type="text"
-                        name="username"
+                        name="addressLine2"
+                        className={classes.textArea}
+                        placeholder="Address Line2(Optional)"
+                        id="addInfo"
+                        value={address2}
+                        onChange={event => setAddress2(event.target.value)}
+                    /><br></br>
+                    <input
+                        type="text"
+                        name="zipCode"
                         className={classes.input1}
                         placeholder="Zip Code"
+                        id="addInfo"
+                        value={zipcode}
+                        onChange={event => setZipcode(event.target.value)}
                     />
                     <input
                         type="text"
-                        name="username"
+                        name="state"
                         className={classes.input1}
                         placeholder="State"
-
+                        id="addInfo"
+                        value={state}
+                        onChange={event => setState(event.target.value)}
                     /><br></br>
                     <input
-                        type="password"
-                        name="password"
+                        type="text"
+                        name="city"
                         className={classes.textArea}
                         placeholder="City"
+                        id="addInfo"
+                        value={city}
+                        onChange={event => setCity(event.target.value)}
                     />
                     <div className={classes.button}>
                         <Button className={classes.button1} variant="contained">Cancel</Button>
-                        <Button className={classes.button2} variant="contained">Save</Button>
+                        <Button className={classes.button2} variant="contained"  onClick={addInfo}>Save</Button>
                     </div>
                 </form>
             </div>
