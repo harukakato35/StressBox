@@ -2,16 +2,17 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import Header from './BasicComponents/Header';
-import Footer from './BasicComponents/Footer';
+import Header from '../BasicComponents/Header';
+import Footer from '../BasicComponents/Footer';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Box from '@material-ui/core/Box';
-import present from './Picture/present.jpg';
+import present from '../Picture/present.jpg';
 import { Link } from 'react-router-dom'
 import db from '../../index.js';
-import React, { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
 import firebase from 'firebase';
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -87,16 +88,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MyPage() {
     const classes = useStyles();
-    const [input, setInput] = useState('');
-
-    const addInfo = (event) => {
-        event.preventDefault();
-        db.collection('info').add({
-            info: input,
-            datetime: firebase.firestore.FieldValue.serverTimestamp()
-        })
-        setInput('');
-    }
+    const [info, setInfo] = useState([]);
 
     return (
         <React.Fragment>
@@ -106,55 +98,56 @@ export default function MyPage() {
                 <form className={classes.form} >
                     <input
                         type="text"
-                        name="username"
+                        name="firstName"
                         id="addInfo"
                         className={classes.input1}
                         placeholder="First Name"
-                        value={input}
-                        onChange={event => setInput(event.target.value)}
-
                     />
                     <input
                         type="text"
-                        name="username"
+                        name="LastName"
                         className={classes.input1}
                         placeholder="Last Name"
-
+                        id="addInfo"
                     /><br></br>
                     <input
                         type="text"
-                        name="email"
+                        name="addressLine1"
                         className={classes.input}
                         placeholder="Address Line1"
+                        id="addInfo"
                     /><br></br>
                     <input
-                        type="password"
-                        name="password"
+                        type="text"
+                        name="addressLine2"
                         className={classes.textArea}
                         placeholder="Address Line2(Optional)"
+                        id="addInfo"
                     /><br></br>
                     <input
                         type="text"
-                        name="username"
+                        name="zipCode"
                         className={classes.input1}
                         placeholder="Zip Code"
+                        id="addInfo"
                     />
                     <input
                         type="text"
-                        name="username"
+                        name="state"
                         className={classes.input1}
                         placeholder="State"
-
+                        id="addInfo"
                     /><br></br>
                     <input
-                        type="password"
-                        name="password"
+                        type="text"
+                        name="city"
                         className={classes.textArea}
                         placeholder="City"
+                        id="addInfo"
                     />
                     <div className={classes.button}>
-                        <Button className={classes.button1} variant="contained">Cancel</Button>
-                        <Button className={classes.button2} variant="contained"  onClick={addInfo}>Save</Button>
+                        <Button className={classes.button1} variant="contained"  >Cancel</Button>
+                        <Button className={classes.button2} variant="contained"  >Save</Button>
                     </div>
                 </form>
             </div>

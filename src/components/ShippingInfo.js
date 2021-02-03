@@ -88,6 +88,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MyPage() {
     const classes = useStyles();
+    const [info, setInfo] = useState([]);
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [address1, setAddress1] = useState('');
@@ -100,7 +101,7 @@ export default function MyPage() {
     const addInfo = (event) => {
         event.preventDefault();
         db.collection('info').add({
-            info: firstName,lastName,
+            info: firstName,lastName,address1,address2,zipcode,state,city,
             datetime: firebase.firestore.FieldValue.serverTimestamp()
         })
         setFirstName('');
@@ -111,6 +112,7 @@ export default function MyPage() {
         setState('');
         setCity('');
     }
+
 
     return (
         <React.Fragment>
@@ -182,7 +184,7 @@ export default function MyPage() {
                         onChange={event => setCity(event.target.value)}
                     />
                     <div className={classes.button}>
-                        <Button className={classes.button1} variant="contained">Cancel</Button>
+                        <Button className={classes.button1} variant="contained"  >Cancel</Button>
                         <Button className={classes.button2} variant="contained"  onClick={addInfo}>Save</Button>
                     </div>
                 </form>
