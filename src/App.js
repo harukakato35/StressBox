@@ -6,6 +6,7 @@ import SignUp from './components/SignUp';
 import  MyPage from './components/MyPage';
 import SignIn from './components/SignIn';
 import ShippingInfo from './components/initialQuestionnair/ShippingInfo';
+import ShippingInfo1 from './components/ShippingInfo1';
 import { ConnectedRouter } from 'connected-react-router';
 import {history} from './configureStore';
 import {Provider, useSelector} from 'react-redux'
@@ -35,6 +36,9 @@ const App = () => {
                     </Switch>
                     <Switch>
                         <Route exact path="/mypage/shippinginfo" component={ShippingInfo}/>
+                    </Switch>
+                    <Switch>
+                        <Route exact path="/shippinginfo" component={ShippingInfo1}/>
                     </Switch>
                     <Switch>
                         <Route exact path="/signin" component={SignIn}/>

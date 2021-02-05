@@ -98,10 +98,14 @@ export default function MyPage() {
     const [city, setCity] = useState('');
     const firebase = useFirebase();
 
+
+
+
+    // db.collection("users").doc("shippinginfo").set(data);
     const addInfo = (event) => {
         event.preventDefault();
-        db.collection('info').add({
-            info: firstName,lastName,address1,address2,zipcode,state,city,
+        db.collection('users').add({
+            firstName,lastName,address1,address2,zipcode,state,city,
             datetime: firebase.firestore.FieldValue.serverTimestamp()
         })
         setFirstName('');
@@ -112,7 +116,6 @@ export default function MyPage() {
         setState('');
         setCity('');
     }
-
 
     return (
         <React.Fragment>

@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom'
 import db from '../../index.js';
 import  { useState, useEffect } from 'react';
 import firebase from 'firebase';
-
+import { useCollectionData } from "react-firebase-hooks/firestore";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -89,69 +89,97 @@ const useStyles = makeStyles((theme) => ({
 export default function MyPage() {
     const classes = useStyles();
     const [info, setInfo] = useState([]);
+    const [toUpdateId, setToUpdateId] = useState('');
+    const [update, setUpdate] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [address1, setAddress1] = useState('');
+    const [address2, setAddress2] = useState('');
+    const [zipcode, setZipcode] = useState('');
+    const [state, setState] = useState('');
+    const [city, setCity] = useState('');
+    const updateInfo = (event) => {
+        event.preventDefault();
+        db.collection('users').doc().add({
+            firstName,lastName,address1,address2,zipcode,state,city,
+            datetime: firebase.firestore.FieldValue.serverTimestamp()
+        })
+        setFirstName('');
+        setLastName('');
+        setAddress1('');
+        setAddress2('');
+        setZipcode('');
+        setState('');
+        setCity('');
+    }
 
-    return (
-        <React.Fragment>
-            <Header/>
-            <div  className={classes.div} >
-                <h1 className={classes.h1}>Shipping information</h1>
-                <form className={classes.form} >
-                    <input
-                        type="text"
-                        name="firstName"
-                        id="addInfo"
-                        className={classes.input1}
-                        placeholder="First Name"
-                    />
-                    <input
-                        type="text"
-                        name="LastName"
-                        className={classes.input1}
-                        placeholder="Last Name"
-                        id="addInfo"
-                    /><br></br>
-                    <input
-                        type="text"
-                        name="addressLine1"
-                        className={classes.input}
-                        placeholder="Address Line1"
-                        id="addInfo"
-                    /><br></br>
-                    <input
-                        type="text"
-                        name="addressLine2"
-                        className={classes.textArea}
-                        placeholder="Address Line2(Optional)"
-                        id="addInfo"
-                    /><br></br>
-                    <input
-                        type="text"
-                        name="zipCode"
-                        className={classes.input1}
-                        placeholder="Zip Code"
-                        id="addInfo"
-                    />
-                    <input
-                        type="text"
-                        name="state"
-                        className={classes.input1}
-                        placeholder="State"
-                        id="addInfo"
-                    /><br></br>
-                    <input
-                        type="text"
-                        name="city"
-                        className={classes.textArea}
-                        placeholder="City"
-                        id="addInfo"
-                    />
-                    <div className={classes.button}>
-                        <Button className={classes.button1} variant="contained"  >Cancel</Button>
-                        <Button className={classes.button2} variant="contained"  >Save</Button>
+
+
+   return (
+                <React.Fragment>
+                    <Header/>
+                    <div className={classes.div}>
+                        <h1 className={classes.h1}>Shipping information</h1>
+
+                        <form className={classes.form}>
+                            <input
+                                type="text"
+                                name="firstName"
+                                id="addInfo"
+                                className={classes.input1}
+                                placeholder="First Name"
+                                value={firstName}
+                                onChange={event => setFirstName(event.target.value)}
+                            />
+                            <input
+                                type="text"
+                                name="LastName"
+                                className={classes.input1}
+                                placeholder="Last Name"
+                                id="addInfo"
+                            /><br></br>
+                            <input
+                                type="text"
+                                name="addressLine1"
+                                className={classes.input}
+                                placeholder="Address Line1"
+                                id="addInfo"
+                            /><br></br>
+                            <input
+                                type="text"
+                                name="addressLine2"
+                                className={classes.textArea}
+                                placeholder="Address Line2(Optional)"
+                                id="addInfo"
+                            /><br></br>
+                            <input
+                                type="text"
+                                name="zipCode"
+                                className={classes.input1}
+                                placeholder="Zip Code"
+                                id="addInfo"
+                            />
+                            <input
+                                type="text"
+                                name="state"
+                                className={classes.input1}
+                                placeholder="State"
+                                id="addInfo"
+                            /><br></br>
+                            <input
+                                type="text"
+                                name="city"
+                                className={classes.textArea}
+                                placeholder="City"
+                                id="addInfo"
+                            />
+                            <div className={classes.button}>
+                                <Button className={classes.button1} variant="contained">Cancel</Button>
+                                <Button className={classes.button2} variant="contained"  onClick={updateInfo}>Save</Button>
+                            </div>
+                        </form>
                     </div>
-                </form>
-            </div>
-            <Footer/>
-        </React.Fragment>
-    );
+                    <Footer/>
+                </React.Fragment>
+            );
 }
