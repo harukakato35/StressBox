@@ -30,7 +30,7 @@ export default function Header({children}) {
     const auth = useSelector(state => state.auth); //global stateを呼び出すため,Dev toolをみて決めてる
     const dispatch = useDispatch();
     const [user, setUser] = useState(null);
-
+    const uid = firebase.auth().currentUser?.uid;
     useEffect(() => {
         return firebase.auth().onAuthStateChanged(user => {
             setUser(user);

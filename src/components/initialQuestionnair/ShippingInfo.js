@@ -13,6 +13,7 @@ import db from '../../index.js';
 import  { useState, useEffect } from 'react';
 import firebase from 'firebase';
 import { useCollectionData } from "react-firebase-hooks/firestore";
+import {auth} from '../../index.js';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -88,31 +89,17 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MyPage() {
     const classes = useStyles();
-    const [info, setInfo] = useState([]);
-    const [toUpdateId, setToUpdateId] = useState('');
-    const [update, setUpdate] = useState('');
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [address1, setAddress1] = useState('');
-    const [address2, setAddress2] = useState('');
-    const [zipcode, setZipcode] = useState('');
-    const [state, setState] = useState('');
-    const [city, setCity] = useState('');
-    const updateInfo = (event) => {
-        event.preventDefault();
-        db.collection('users').doc().add({
-            firstName,lastName,address1,address2,zipcode,state,city,
-            datetime: firebase.firestore.FieldValue.serverTimestamp()
-        })
-        setFirstName('');
-        setLastName('');
-        setAddress1('');
-        setAddress2('');
-        setZipcode('');
-        setState('');
-        setCity('');
-    }
+    const user = firebase.auth().currentUser;
+    const uid = firebase.auth().currentUser?.uid;
 
+    db.collection('users').doc(user.uid).get().then(doc => {
+        if (doc.exists) {
+            // do something
+            doc.data()
+        } else {
+            console.log("No user");
+        }
+    })
 
 
    return (
@@ -120,7 +107,7 @@ export default function MyPage() {
                     <Header/>
                     <div className={classes.div}>
                         <h1 className={classes.h1}>Shipping information</h1>
-
+                        {user.email}
                         <form className={classes.form}>
                             <input
                                 type="text"
@@ -128,8 +115,6 @@ export default function MyPage() {
                                 id="addInfo"
                                 className={classes.input1}
                                 placeholder="First Name"
-                                value={firstName}
-                                onChange={event => setFirstName(event.target.value)}
                             />
                             <input
                                 type="text"
@@ -175,7 +160,7 @@ export default function MyPage() {
                             />
                             <div className={classes.button}>
                                 <Button className={classes.button1} variant="contained">Cancel</Button>
-                                <Button className={classes.button2} variant="contained"  onClick={updateInfo}>Save</Button>
+                                <Button className={classes.button2} variant="contained"  >Save</Button>
                             </div>
                         </form>
                     </div>

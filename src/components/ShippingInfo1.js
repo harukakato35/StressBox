@@ -95,6 +95,7 @@ export default function MyPage() {
     const [address2, setAddress2] = useState('');
     const [zipcode, setZipcode] = useState('');
     const [state, setState] = useState('');
+    const [userId, setUserId] = useState('');
     const [city, setCity] = useState('');
     const firebase = useFirebase();
 
