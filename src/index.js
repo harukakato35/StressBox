@@ -29,7 +29,7 @@ const rrfConfig = {
   useFirestoreForProfile: true,
 };
 
-firebase.firestore();
+
 
 const db = firebaseConfig.firestore();
 export default db;

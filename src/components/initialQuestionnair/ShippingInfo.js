@@ -89,17 +89,11 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MyPage() {
     const classes = useStyles();
-    const user = firebase.auth().currentUser;
-    const uid = firebase.auth().currentUser?.uid;
+    const firestore = firebase.firestore();
+    const user = firebase.auth().currentUser
+    const uid = firebase.auth().currentUser.uid;
 
-    db.collection('users').doc(user.uid).get().then(doc => {
-        if (doc.exists) {
-            // do something
-            doc.data()
-        } else {
-            console.log("No user");
-        }
-    })
+    firestore.collection('user').doc(uid);
 
 
    return (
@@ -107,7 +101,7 @@ export default function MyPage() {
                     <Header/>
                     <div className={classes.div}>
                         <h1 className={classes.h1}>Shipping information</h1>
-                        {user.email}
+                        {user.firstName}
                         <form className={classes.form}>
                             <input
                                 type="text"

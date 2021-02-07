@@ -72,6 +72,7 @@ export default function SignIn() {
     const dispatch = useDispatch();
     const firebase = useFirebase();
 
+
     const signInWithGoogle = () => {
         firebase
             .login({

@@ -35,10 +35,10 @@ const App = () => {
                         <Route exact path="/mypage" component={MyPage}/>
                     </Switch>
                     <Switch>
-                        <Route exact path="/mypage/shippinginfo" component={ShippingInfo}/>
+                        <Route exact path="/mypage/shippinginfo" component={ShippingInfo1}/>
                     </Switch>
                     <Switch>
-                        <Route exact path="/shippinginfo" component={ShippingInfo1}/>
+                        <Route exact path="/shippinginfo" component={ShippingInfo}/>
                     </Switch>
                     <Switch>
                         <Route exact path="/signin" component={SignIn}/>

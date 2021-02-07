@@ -13,6 +13,7 @@ import db from '.././index.js';
 import { useState, useEffect } from 'react';
 import firebase from "firebase/app";
 import {useFirebase} from "react-redux-firebase";
+import {useSelector} from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -98,11 +99,10 @@ export default function MyPage() {
     const [userId, setUserId] = useState('');
     const [city, setCity] = useState('');
     const firebase = useFirebase();
+    const auth = useSelector(state => state.auth);
 
 
 
-
-    // db.collection("users").doc("shippinginfo").set(data);
     const addInfo = (event) => {
         event.preventDefault();
         db.collection('users').add({
