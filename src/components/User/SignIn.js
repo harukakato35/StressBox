@@ -3,8 +3,8 @@ import 'firebase/auth'
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import Header from './BasicComponents/Header';
-import Footer from './BasicComponents/Footer';
+import Header from '../BasicComponents/Header';
+import Footer from '../BasicComponents/Footer';
 import Button from '@material-ui/core/Button';
 import { useFirebase } from "react-redux-firebase";
 import { useDispatch, useSelector } from 'react-redux';

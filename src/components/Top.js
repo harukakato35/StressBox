@@ -7,6 +7,7 @@ import Container from '@material-ui/core/Container';
 import candles from './Picture/candles.jpg';
 import Button from '@material-ui/core/Button';
 import { useFirebaseApp } from 'reactfire';
+import {Link} from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -46,7 +47,7 @@ export default function Top() {
                 }}>
 
                     <Button variant="contained" color="primary" disableElevation className={classes.button}>
-                        Disable elevation
+                        <Link to="/question">Get started</Link>
                     </Button>
                     <p className={classes.p}>Picked Just <br></br>For You</p>
                 </Box>

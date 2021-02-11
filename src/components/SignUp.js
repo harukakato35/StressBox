@@ -5,6 +5,9 @@ import 'firebase/auth'
 import Header from './BasicComponents/Header';
 import Footer from './BasicComponents/Footer';
 import Button from '@material-ui/core/Button';
+import {push} from "connected-react-router";
+import {useDispatch, useSelector} from "react-redux";
+import {useFirebase} from "react-redux-firebase";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -72,7 +75,20 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignUp() {
     const classes = useStyles();
+    const auth = useSelector(state => state.auth); //global stateを呼び出すため,Dev toolをみて決めてる
+    const dispatch = useDispatch();
+    const firebase = useFirebase();
 
+    const signInWithGoogle = () => {
+        firebase
+            .login({
+                provider: "google",
+                type: "popup",
+            })
+            .then(() => {
+                dispatch(push('/shippinginfo'));
+            });
+    };
 
 
 
@@ -107,8 +123,12 @@ export default function SignUp() {
                     Continue
                 </Button>
                 <p>or</p>
-                <Button classes={{root: classes.button2,}}>
-                   Login with Gmail
+                <Button classes={{root: classes.button2,}}
+                        onClick={(event) => {
+                            event.preventDefault();
+                            signInWithGoogle();
+                        }} >
+                   Signup with Gmail
                 </Button>
             </div>
             </form>

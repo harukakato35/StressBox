@@ -2,12 +2,12 @@ import React, {useEffect, useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import Header from './BasicComponents/Header';
-import Footer from './BasicComponents/Footer';
+import Header from '../BasicComponents/Header';
+import Footer from '../BasicComponents/Footer';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Box from '@material-ui/core/Box';
-import present from './Picture/present.jpg';
+import present from '../Picture/present.jpg';
 import { Link } from 'react-router-dom'
 import {useSelector} from "react-redux";
 import firebase from "firebase";

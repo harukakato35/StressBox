@@ -2,14 +2,14 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import Header from './BasicComponents/Header';
-import Footer from './BasicComponents/Footer';
+import Header from '../BasicComponents/Header';
+import Footer from '../BasicComponents/Footer';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Box from '@material-ui/core/Box';
-import present from './Picture/present.jpg';
+import present from '../Picture/present.jpg';
 import { Link } from 'react-router-dom'
-import db from '.././index.js';
+import db from '../../index.js';
 import { useState, useEffect } from 'react';
 import firebase from "firebase/app";
 import {useFirebase} from "react-redux-firebase";
@@ -189,7 +189,7 @@ export default function MyPage() {
                     />
                     <div className={classes.button}>
                         <Button className={classes.button1} variant="contained"  >Cancel</Button>
-                        <Button className={classes.button2} variant="contained"  onClick={addInfo}>Save</Button>
+                        <Button className={classes.button2} variant="contained"  onClick={addInfo}><Link to="payment">Save</Link></Button>
                     </div>
                 </form>
             </div>

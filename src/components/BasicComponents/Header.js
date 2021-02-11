@@ -9,7 +9,7 @@ import {useDispatch, useSelector} from "react-redux";
 import { useState } from 'react';
 import { useEffect } from 'react'
 import firebase from "firebase/app";
-
+import { Link } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -60,7 +60,7 @@ export default function Header({children}) {
                             {user ? (
                                 <button onClick={logout}>Google Logout</button>
                             ) : (
-                               <div></div>
+                                <button><Link to="/signin">Signin</Link></button>
                             )}
                         </Toolbar>
                     </AppBar>
