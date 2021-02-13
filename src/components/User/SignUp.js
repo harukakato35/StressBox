@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { useFirebaseApp } from 'reactfire';
 import 'firebase/auth'
-import Header from './BasicComponents/Header';
-import Footer from './BasicComponents/Footer';
+import Header from '../BasicComponents/Header';
+import Footer from '../BasicComponents/Footer';
 import Button from '@material-ui/core/Button';
 import {push} from "connected-react-router";
 import {useDispatch, useSelector} from "react-redux";
@@ -47,6 +47,7 @@ const useStyles = makeStyles((theme) => ({
         padding: '.3em',
         borderRadius: 10,
         border: '1px solid #aaa',
+        marginBottom: 10,
     },
     input1:{
         width: '15%',
@@ -59,7 +60,6 @@ const useStyles = makeStyles((theme) => ({
         border: '1px solid #aaa',
     },
     textArea:{
-        marginTop:10,
         marginBottom: 20,
         borderRadius: 10,
         fontSize: 15,
@@ -93,9 +93,7 @@ export default function SignUp() {
 
 
     return (
-
         <div >
-
             <h1 className={classes.h1}>Create Account!</h1>
             <form className={classes.form} >
                 <input

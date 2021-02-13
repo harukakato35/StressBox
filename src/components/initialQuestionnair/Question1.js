@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom'
 import Header from '../BasicComponents/Header';
@@ -32,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
         color: theme.palette.text.secondary,
         height: 100,
         margin:5,
+        width: '100%',
     },
     grid:{
         marginTop: 50,
@@ -43,11 +44,112 @@ const useStyles = makeStyles((theme) => ({
         alignContent:  'center',
         marginBottom: 50,
     },
+    blackButton:{
+        backgroundColor: 'black',
+        color: 'white',
+    },
+
+    whiteButton:{
+        backgroundColor: 'white',
+        color: 'black',
+    }
 }));
 
-export default function Question1() {
+export default function Question2() {
     const classes = useStyles();
+    const [color,setColor]=useState('#F5F5F5');
+    const [textColor,setTextColor]=useState('black');
+    const [color1,setColor1]=useState('#F5F5F5');
+    const [textColor1,setTextColor1]=useState('black');
+    const [color2,setColor2]=useState('#F5F5F5');
+    const [textColor2,setTextColor2]=useState('black');
+    const [color3,setColor3]=useState('#F5F5F5');
+    const [textColor3,setTextColor3]=useState('black');
+    const [color4,setColor4]=useState('#F5F5F5');
+    const [textColor4,setTextColor4]=useState('black');
+    const [color5,setColor5]=useState('#F5F5F5');
+    const [textColor5,setTextColor5]=useState('black');
 
+    const button = (
+        <Button style={{background:color,color:textColor}}
+                className={classes.paper}
+                onClick={()=>{setColor("purple");setTextColor('white')
+                }}>
+            asda
+        </Button>
+    )
+
+    const button1 = (
+        <Button style={{background:color1,color:textColor1}}
+                className={classes.paper}
+                onClick={()=>{setColor1("purple");setTextColor1('white')
+                }}>
+            asda
+        </Button>
+    );
+
+
+    const button2 = (
+        <Button style={{background:color2,color:textColor2}}
+                className={classes.paper}
+                onClick={()=>{setColor2("purple");setTextColor2('white')
+                }}>
+            asda
+        </Button>
+    );
+
+    const button3 = (
+        <Button style={{background:color3,color:textColor3}}
+                className={classes.paper}
+                onClick={()=>{setColor3("purple");setTextColor3('white')
+                }}>
+            asda
+        </Button>
+    );
+
+    const button4 = (
+        <Button style={{background:color4,color:textColor4}}
+                className={classes.paper}
+                onClick={()=>{setColor4("purple");setTextColor4('white')
+                }}>
+            asda
+        </Button>
+    );
+
+    const button5 = (
+        <Button style={{background:color5,color:textColor5}}
+                className={classes.paper}
+                onClick={()=>{setColor5("purple");setTextColor5('white')
+                }}>
+            asda
+        </Button>
+    );
+    const grid = (
+        <div>
+            <Grid container className={classes.grid} >
+                <Grid item xs={6} sm={2} >
+                    {button}
+                </Grid>
+                <Grid item xs={6} sm={2}>
+                    {button1}
+                </Grid>
+                <Grid item xs={6} sm={2}>
+                    {button2}
+                </Grid>
+            </Grid>
+            <Grid container className={classes.grid1}>
+                <Grid item xs={6} sm={2}>
+                    {button3}
+                </Grid>
+                <Grid item xs={6} sm={2}>
+                    {button4}
+                </Grid>
+                <Grid item xs={6} sm={2}>
+                    {button5}
+                </Grid>
+            </Grid>
+        </div>
+    )
     return (
         <React.Fragment>
             <Header/>
@@ -60,30 +162,9 @@ export default function Question1() {
                 <p className={classes.font}>50% complete</p>
                 <h1 className={classes.font} >How did your stress change over the month?</h1>
                 <h3 className={classes.font}>Select all that apply(required)</h3>
-                    <Grid container className={classes.grid} >
-                        <Grid item xs={6} sm={2} >
-                            <Paper className={classes.paper}>xs=6 sm=3</Paper>
-                        </Grid>
-                        <Grid item xs={6} sm={2}>
-                            <Paper className={classes.paper}>xs=6 sm=3</Paper>
-                        </Grid>
-                        <Grid item xs={6} sm={2}>
-                            <Paper className={classes.paper}>xs=6 sm=3</Paper>
-                        </Grid>
-                    </Grid>
-                    <Grid container className={classes.grid1}>
-                        <Grid item xs={6} sm={2}>
-                            <Paper className={classes.paper}>xs=6 sm=3</Paper>
-                        </Grid>
-                        <Grid item xs={6} sm={2}>
-                            <Paper className={classes.paper}>xs=6 sm=3</Paper>
-                        </Grid>
-                        <Grid item xs={6} sm={2}>
-                            <Paper className={classes.paper}>xs=6 sm=3</Paper>
-                        </Grid>
-                    </Grid>
+                {grid}
                 <Button variant="contained" color="primary" disableElevation className={classes.button}>
-                    <Link to="/question2">⇨　Next question</Link>
+                    <Link to="/question2">⇨　Show the result for me</Link>
                 </Button>
             </Box>
             <Footer/>

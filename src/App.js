@@ -2,7 +2,7 @@ import React, {Suspense, useEffect, useState} from 'react';
 import { BrowserRouter as Router,Switch, Route} from 'react-router-dom';
 import Top from './components/Top';
 import Contact from './components/Contact';
-import SignUp from './components/SignUp';
+import SignUp from './components/User/SignUp';
 import  MyPage from './components/User/MyPage';
 import SignIn from './components/User/SignIn';
 import ShippingInfo from './components/User/ShippingInfo';

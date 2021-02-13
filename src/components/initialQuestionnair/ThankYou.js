@@ -1,13 +1,13 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Link } from 'react-router-dom'
 import Header from '../BasicComponents/Header';
 import Footer from '../BasicComponents/Footer';
 import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
-import candles1 from '../Picture/candles1.jpg';
+import thankyou from "../Picture/thankyou.png";
 import Button from '@material-ui/core/Button';
 import { useFirebaseApp } from 'reactfire';
+import {Link} from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -16,32 +16,25 @@ const useStyles = makeStyles((theme) => ({
     box:{
         position: 'relative',
     },
-    button:{
-        position: 'absolute',
-        top: '80%',
-        left: '10%',
-        opacity: 0.5,
-        height: 60,
-        borderRadius: 50,
-    },
-    p:{
-        position: 'absolute',
-        top: '1%',
-        left: '5%',
-        height: 60,
-        fontSize: 80,
-    }
 }));
 
-export default function Question1() {
+export default function Top() {
     const classes = useStyles();
 
     return (
         <React.Fragment>
             <Header/>
-            <Button variant="contained" color="primary" disableElevation className={classes.button}>
-                <Link to="/question2">⇨　Go to questions</Link>
-            </Button>
+            <Box
+                className={classes.box}
+                style={{
+                    backgroundImage: `url(${thankyou})`,
+                    backgroundSize: "cover",
+                    height: "100vh",
+                    color: "#f5f5f5"
+                }}>
+
+
+            </Box>
             <Footer/>
         </React.Fragment>
     );
