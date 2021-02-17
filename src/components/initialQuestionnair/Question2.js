@@ -70,12 +70,15 @@ export default function Question2() {
     const [color5,setColor5]=useState('#F5F5F5');
     const [textColor5,setTextColor5]=useState('black');
 
+    const [colors, setColors]=useState(['white', 'white', 'white']);
+    const changeColor = function (index, value) {
+        colors[0] = 'purple'
 
+    }
     const button = (
-        <Button style={{background:color,color:textColor}}
+        <Button　style={{background:colors}}
                 className={classes.paper}
-                onClick={()=>{setColor("purple");setTextColor('white')
-                }}>
+                onClick={() => changeColor(0, 'black')}>
             asda
         </Button>
         )
@@ -83,7 +86,9 @@ export default function Question2() {
     const button1 = (
         <Button style={{background:color1,color:textColor1}}
                 className={classes.paper}
-                onClick={()=>{setColor1("purple");setTextColor1('white')
+                onClick={()=> {
+                    setColor1("purple");
+                    setTextColor1('white')
                 }}>
             asda
         </Button>
