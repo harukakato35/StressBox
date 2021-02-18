@@ -122,7 +122,7 @@ function startDataListeners() {
       });
     });
   // Get all subscriptions for the customer
-  db.collection('customers')
+  db.collection('users')
     .doc(currentUser)
     .collection('subscriptions')
     .where('status', 'in', ['trialing', 'active'])
@@ -164,7 +164,7 @@ async function subscribe(event) {
   const formData = new FormData(event.target);
 
   const docRef = await db
-    .collection('customers')
+    .collection('users')
     .doc(currentUser)
     .collection('checkout_sessions')
     .add({
