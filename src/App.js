@@ -12,7 +12,6 @@ import Question2 from './components/initialQuestionnair/Question2';
 import Result from './components/initialQuestionnair/Result';
 import ThankYou from './components/initialQuestionnair/ThankYou';
 import ShippingInfo1 from './components/initialQuestionnair/ShippingInfo1';
-import Payment from './components/initialQuestionnair/Payment';
 import { ConnectedRouter } from 'connected-react-router';
 import {history} from './configureStore';
 import {Provider, useSelector} from 'react-redux'
@@ -62,7 +61,7 @@ const App = () => {
                         <Route exact path="/shippinginfo" component={ShippingInfo1}/>
                     </Switch>
                     <Switch>
-                        <Route exact path="/payment" component={Payment}/>
+                        <Route exact path="/payment" render={() => {window.location.href="index.html"}} />
                     </Switch>
                     <Switch>
                         <Route exact path="/signin" component={SignIn}/>
