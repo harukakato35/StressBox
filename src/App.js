@@ -11,6 +11,7 @@ import Question1 from './components/initialQuestionnair/Question1';
 import Question2 from './components/initialQuestionnair/Question2';
 import Result from './components/initialQuestionnair/Result';
 import ThankYou from './components/initialQuestionnair/ThankYou';
+import Payment from './components/Stripe/Payment';
 import ShippingInfo1 from './components/initialQuestionnair/ShippingInfo1';
 import { ConnectedRouter } from 'connected-react-router';
 import {history} from './configureStore';
@@ -61,7 +62,7 @@ const App = () => {
                         <Route exact path="/shippinginfo" component={ShippingInfo1}/>
                     </Switch>
                     <Switch>
-                        <Route exact path="/payment" render={() => {window.location.href="index.html"}} />
+                        <Route exact path="/payment" component={Payment}/>
                     </Switch>
                     <Switch>
                         <Route exact path="/signin" component={SignIn}/>
