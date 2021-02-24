@@ -57,7 +57,7 @@ whiteButton:{
 
 export default function Question2() {
     const classes = useStyles();
-    const [color,setColor]=useState('#F5F5F5');
+
     const [textColor,setTextColor]=useState('black');
     const [color1,setColor1]=useState('#F5F5F5');
     const [textColor1,setTextColor1]=useState('black');
@@ -70,66 +70,26 @@ export default function Question2() {
     const [color5,setColor5]=useState('#F5F5F5');
     const [textColor5,setTextColor5]=useState('black');
 
-    const [colors, setColors]=useState(['white', 'white', 'white']);
-    const changeColor = function (index, value) {
-        colors[0] = 'purple'
+    const [color , setColor] = useState(['white', 'white', 'white'])
 
-    }
+    const handleChange = (e) => {
+        const { index, value } = e.target;
+        setColor({
+            ...color,
+            [e.target.index]: e.target.value
+        });
+    };
+
     const button = (
-        <Button　style={{background:colors}}
+        <Button
+            style={{background:color}}
                 className={classes.paper}
-                onClick={() => changeColor(0, 'black')}>
+                onClick={() => handleChange(0, 'purple')}>
             asda
         </Button>
         )
 
-    const button1 = (
-        <Button style={{background:color1,color:textColor1}}
-                className={classes.paper}
-                onClick={()=> {
-                    setColor1("purple");
-                    setTextColor1('white')
-                }}>
-            asda
-        </Button>
-    );
 
-
-    const button2 = (
-        <Button style={{background:color2,color:textColor2}}
-                className={classes.paper}
-                onClick={()=>{setColor2("purple");setTextColor2('white')
-                }}>
-            asda
-        </Button>
-    );
-
-    const button3 = (
-        <Button style={{background:color3,color:textColor3}}
-                className={classes.paper}
-                onClick={()=>{setColor3("purple");setTextColor3('white')
-                }}>
-            asda
-        </Button>
-    );
-
-    const button4 = (
-        <Button style={{background:color4,color:textColor4}}
-                className={classes.paper}
-                onClick={()=>{setColor4("purple");setTextColor4('white')
-                }}>
-            asda
-        </Button>
-    );
-
-    const button5 = (
-        <Button style={{background:color5,color:textColor5}}
-                className={classes.paper}
-                onClick={()=>{setColor5("purple");setTextColor5('white')
-                }}>
-            asda
-        </Button>
-    );
     const grid = (
         <div>
             <Grid container className={classes.grid} >
@@ -137,21 +97,21 @@ export default function Question2() {
                     {button}
                 </Grid>
                 <Grid item xs={6} sm={2}>
-                    {button1}
+
                 </Grid>
                 <Grid item xs={6} sm={2}>
-                    {button2}
+
                 </Grid>
             </Grid>
             <Grid container className={classes.grid1}>
                 <Grid item xs={6} sm={2}>
-                    {button3}
+
                 </Grid>
                 <Grid item xs={6} sm={2}>
-                    {button4}
+
                 </Grid>
                 <Grid item xs={6} sm={2}>
-                    {button5}
+
                 </Grid>
             </Grid>
         </div>
