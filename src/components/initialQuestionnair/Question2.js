@@ -45,14 +45,14 @@ const useStyles = makeStyles((theme) => ({
         marginBottom: 50,
     },
     blackButton:{
-    backgroundColor: 'black',
-    color: 'white',
-},
+        backgroundColor: 'black',
+        color: 'white',
+    },
 
-whiteButton:{
-    backgroundColor: 'white',
-    color: 'black',
-}
+    whiteButton:{
+        backgroundColor: 'white',
+        color: 'black',
+    }
 }));
 
 export default function Question2() {
@@ -72,24 +72,30 @@ export default function Question2() {
 
     const [color , setColor] = useState(['white', 'white', 'white'])
 
-    const handleChange = (e) => {
-        const { index, value } = e.target;
+    const handleChange = (index, color) => {
         setColor({
-            ...color,
-            [e.target.index]: e.target.value
+        [index]: color,
+
         });
     };
 
     const button = (
         <Button
-            style={{background:color}}
-                className={classes.paper}
-                onClick={() => handleChange(0, 'purple')}>
+            style={{backgroundColor:color}}
+            className={classes.paper}
+            onClick={() => handleChange(0, 'purple')}>
             asda
         </Button>
-        )
+    )
 
-
+    const button1 = (
+        <Button
+            style={{background:color}}
+            className={classes.paper}
+            onClick={() => handleChange(1, 'purple')}>
+            asda
+        </Button>
+    )
     const grid = (
         <div>
             <Grid container className={classes.grid} >
@@ -129,7 +135,7 @@ export default function Question2() {
                 <p className={classes.font}>100% complete</p>
                 <h1 className={classes.font} >How did your stress change over the month?</h1>
                 <h3 className={classes.font}>Select all that apply(required)</h3>
-                     {grid}
+                {grid}
                 <Button variant="contained" color="primary" disableElevation className={classes.button}>
                     <Link to="/result">⇨　Go to next question</Link>
                 </Button>
