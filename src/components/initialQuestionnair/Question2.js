@@ -70,40 +70,32 @@ export default function Question2() {
     const [color5,setColor5]=useState('#F5F5F5');
     const [textColor5,setTextColor5]=useState('black');
 
-    const [color , setColor] = useState(['white', 'white', 'white'])
-
+    const [colors, setColors] = useState(["white","white","white","white","white","white"]);
     const handleChange = (index, color) => {
-        setColor({
-        [index]: color,
-
-        });
+        const newColors = [...colors];
+        newColors[index] = color;
+        setColors(newColors);
     };
 
-    const button = (
-        <Button
-            style={{backgroundColor:color}}
-            className={classes.paper}
-            onClick={() => handleChange(0, 'purple')}>
-            asda
-        </Button>
-    )
 
-    const button1 = (
-        <Button
-            style={{background:color}}
-            className={classes.paper}
-            onClick={() => handleChange(1, 'purple')}>
-            asda
-        </Button>
-    )
     const grid = (
         <div>
             <Grid container className={classes.grid} >
                 <Grid item xs={6} sm={2} >
-                    {button}
+                    <Button
+                        style={{background:colors}}
+                        className={classes.paper}
+                        onClick={() => handleChange(0, 'purple')}>
+                        asda
+                    </Button>
                 </Grid>
                 <Grid item xs={6} sm={2}>
-
+                    <Button
+                        style={{background:colors}}
+                        className={classes.paper}
+                        onClick={() => handleChange(1, 'black')}>
+                        asda
+                    </Button>
                 </Grid>
                 <Grid item xs={6} sm={2}>
 
