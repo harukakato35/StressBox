@@ -29,10 +29,10 @@ const useStyles = makeStyles((theme) => ({
     },
     paper: {
         textAlign: 'center',
-        color: theme.palette.text.secondary,
         height: 100,
         margin:5,
         width: '100%',
+        opacity: 0.7,
     },
     grid:{
         marginTop: 50,
@@ -44,36 +44,22 @@ const useStyles = makeStyles((theme) => ({
         alignContent:  'center',
         marginBottom: 50,
     },
-    blackButton:{
-        backgroundColor: 'black',
-        color: 'white',
-    },
-
-    whiteButton:{
-        backgroundColor: 'white',
-        color: 'black',
-    }
 }));
 
 export default function Question2() {
     const classes = useStyles();
 
-    const [textColor,setTextColor]=useState('black');
-    const [color1,setColor1]=useState('#F5F5F5');
-    const [textColor1,setTextColor1]=useState('black');
-    const [color2,setColor2]=useState('#F5F5F5');
-    const [textColor2,setTextColor2]=useState('black');
-    const [color3,setColor3]=useState('#F5F5F5');
-    const [textColor3,setTextColor3]=useState('black');
-    const [color4,setColor4]=useState('#F5F5F5');
-    const [textColor4,setTextColor4]=useState('black');
-    const [color5,setColor5]=useState('#F5F5F5');
-    const [textColor5,setTextColor5]=useState('black');
-
-    const [colors, setColors] = useState(["white","white","white","white","white","white"]);
-    const handleChange = (index, color) => {
+    const [colors, setColors] = React.useState([
+        "white",
+        "white",
+        "white",
+        "white",
+        "white",
+        "white"
+    ]);
+    const handleChange = (index, value) => {
         const newColors = [...colors];
-        newColors[index] = color;
+        newColors[index] = value;
         setColors(newColors);
     };
 
@@ -83,7 +69,7 @@ export default function Question2() {
             <Grid container className={classes.grid} >
                 <Grid item xs={6} sm={2} >
                     <Button
-                        style={{background:colors}}
+                        style={{ background: colors[0] }}
                         className={classes.paper}
                         onClick={() => handleChange(0, 'purple')}>
                         asda
@@ -91,25 +77,45 @@ export default function Question2() {
                 </Grid>
                 <Grid item xs={6} sm={2}>
                     <Button
-                        style={{background:colors}}
+                        style={{ background: colors[1] }}
                         className={classes.paper}
-                        onClick={() => handleChange(1, 'black')}>
+                        onClick={() => handleChange(1, 'purple')}>
                         asda
                     </Button>
                 </Grid>
                 <Grid item xs={6} sm={2}>
-
+                    <Button
+                        style={{ background: colors[2] }}
+                        className={classes.paper}
+                        onClick={() => handleChange(2, 'purple')}>
+                        asda
+                    </Button>
                 </Grid>
             </Grid>
             <Grid container className={classes.grid1}>
                 <Grid item xs={6} sm={2}>
-
+                    <Button
+                        style={{ background: colors[3] }}
+                        className={classes.paper}
+                        onClick={() => handleChange(3, 'purple')}>
+                        asda
+                    </Button>
                 </Grid>
                 <Grid item xs={6} sm={2}>
-
+                    <Button
+                        style={{ background: colors[4] }}
+                        className={classes.paper}
+                        onClick={() => handleChange(4, 'purple')}>
+                        asda
+                    </Button>
                 </Grid>
                 <Grid item xs={6} sm={2}>
-
+                    <Button
+                        style={{ background: colors[5] }}
+                        className={classes.paper}
+                        onClick={() => handleChange(5, 'purple')}>
+                        asda
+                    </Button>
                 </Grid>
             </Grid>
         </div>
